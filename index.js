@@ -32,6 +32,20 @@ const HelloWorldIntentHandler = {
   }
 };
 
+const KigaoHandler = {
+  canHandle(handlerInput) {
+    return (
+      handlerInput.requestEnvelope.request.type === "IntentRequest" &&
+      handlerInput.requestEnvelope.request.intent.name === "KigaoIntent"
+    );
+  },
+  handle(handlerInput) {
+    const speechText = "ca ca uma cobra, né meu!";
+
+    return handlerInput.responseBuilder.speak(speechText).getResponse();
+  }
+};
+
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return (
@@ -104,6 +118,7 @@ exports.handler = async function(event, context) {
       .addRequestHandlers(
         LaunchRequestHandler,
         HelloWorldIntentHandler,
+        KigaoHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler
